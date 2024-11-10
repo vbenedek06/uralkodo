@@ -26,10 +26,47 @@ const data = [
     }
 ];
 
+const table = document.createElement('table')
+document.body.appendChild(table)
+
+const tablehead = document.createElement('thead')
+table.appendChild(tablehead)
+
+const tableheadrow = document.createElement('tr')
+tablehead.appendChild(tableheadrow)
+
+const th = document.createElement('th')
+tableheadrow.appendChild(th)
+
+const th2 = document.createElement('th')
+tableheadrow.appendChild(th2)
+
+const th3 = document.createElement('th')
+tableheadrow.appendChild(th3)
+
+const th4 = document.createElement('th')
+tableheadrow.appendChild(th4)
+
+th.innerHTML = "uralkodo_nev"
+th2.innerHTML = "esemeny1"
+th2.colSpan = 2
+th3.innerHTML = "evszam1"
+th4.innerHTML = "esemeny2"
+th.innerHTML = "evszam2"
+
+const tablebody = document.createElement('tbody')
+table.appendChild(tablebody)
+
+
+
+
+
+
+
 GenerateTable()
 function GenerateTable(){
     for (const tortenelem of data) {
-        const tr = document.createElemnt('tr')
+        const tr = document.createElement('tr')
         tablebody.appendChild(tr)
         const uralkodo_nev = document.createElement('td')
 
