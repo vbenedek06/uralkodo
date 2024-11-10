@@ -26,6 +26,7 @@ const data = [
     }
 ];
 
+GenerateTable()
 function GenerateTable(){
     for (const tortenelem of data) {
         const tr = document.createElemnt('tr')
@@ -34,5 +35,21 @@ function GenerateTable(){
 
         tr.appendChild(uralkodo_nev)
         uralkodo_nev.innerHTML = tortenelem.uralkodo_nev
+
+        const esemeny1 = document.createElement('td')
+        tr.appendChild(esemeny1) 
+        esemeny1.innerHTML = tortenelem.esemeny1
+
+        const evszam1 = document.createElemnt('td')
+        tr.appendChild(evszam1)
+        esemeny1.innerHTML = tortenelem.esemeny1
+
+        const esemeny2 = document.createElement('td')
+        tr.appendChild(esemeny2)
+        esemeny2.innerHTML = tortenelem.esemeny2
+
+        const evszam2 = document.createElement('td')
+        tr.appendChild(evszam2)
+        evszam2.innerHTML = tortenelem.evszam2
     }
 }
