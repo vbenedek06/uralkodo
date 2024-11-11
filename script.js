@@ -77,6 +77,13 @@ form.addEventListener('submit', function(e) {
     const esemeny2value = esemeny2.value
     const evszam2value =evszam2.value
 
+    //plusz sor létrehozása
+    if (uralkodo_nevvalue && esemeny1value && evszam1value){
+        //első esemény
+        const tr1 = document.createElement('tr');
+        tablebody.appendChild(tr1);
+    }
+
     if (esemeny2value === ""){
         esemeny2value = undefined
     }
