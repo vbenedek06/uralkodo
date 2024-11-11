@@ -60,6 +60,46 @@ const tablebody = document.createElement('tbody')
 table.appendChild(tablebody)
 
 
+const form =document.getElementById('form')
+form.addEventListener('submit', function(e) {
+    e.preventDefault();
+
+
+    const uralkodo_nev = document.getElementById('uralkodo_nev')
+    const esemeny1 = document.getElementById('esemeny1')
+    const evszam1 = document.getElementById('evszam1')
+    const esemeny2 = document.getElementById('esemeny2')
+    const evszam2 = document.getElementById('evszam2')
+
+    const uralkodo_nevvalue = uralkodo_nev.value
+    const esemeny1value = esemeny1.value
+    const evszam1value = evszam1.value
+    const esemeny2value = esemeny2.value
+    const evszam2value =evszam2.value
+
+    if (esemeny2value === ""){
+        esemeny2value = undefined
+    }
+    
+    if (evszam2value === ""){
+        evszam2value = undefined
+    }
+
+    const ujtortenelem = 
+    {
+        uralkodo_nev: uralkodo_nevvalue,
+        esemeny1: esemeny1value,
+        evszam1: evszam1value,
+        esemeny2: esemeny2value,
+        evszam2: evszam2value,
+    }
+    
+
+
+
+})
+
+
 
 GenerateTable()
 
@@ -87,5 +127,15 @@ function GenerateTable(){
         const evszam2 = document.createElement('td')
         evszam2.innerHTML = tortenelem.evszam2 || ''
         tr.appendChild(evszam2)
+
+        tr.addEventListener('click', function (e) {
+            console.log('click')
+
+            const ez = tablebody.querySelector('.selected')
+            if(ez != undefined){
+                ez.classList.remove('selected')
+            }
+            e.currentTarget.classList.add('selected')
+        })
     }
 }   
