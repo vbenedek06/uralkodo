@@ -82,6 +82,28 @@ form.addEventListener('submit', function(e) {
         //első esemény
         const tr1 = document.createElement('tr');
         tablebody.appendChild(tr1);
+
+        const uralkodoCell = document.createElement('td');
+        uralkodoCell.innerHTML = uralkodo_nevvalue;
+        tr1.appendChild(uralkodoCell);
+
+        const esemeny1Cell = document.createElement('td');
+        esemeny1Cell.innerHTML = esemeny1value;
+        tr1.appendChild(esemeny1Cell);
+
+        const evszam1Cell = document.createElement('td');
+        evszam1Cell.innerHTML = evszam1value;
+        tr1.appendChild(evszam1Cell);
+
+        const esemeny2Cell = document.createElement('td');
+        esemeny2Cell.innerHTML = esemeny2value || '';
+        tr1.appendChild(esemeny2Cell);
+
+        const evszam2Cell = document.createElement('td');
+        evszam2Cell.innerHTML = evszam2value || '';
+        tr1.appendChild(evszam2Cell);
+
+        tr1.classList.add('selected')
     }
 
     if (esemeny2value === ""){
