@@ -1,28 +1,29 @@
 const data = [
     {
-        uralkodo_nev: 'I. István', 
-        esemeny1: 'Koronázás', 
-        evszam1: '1000', 
-        esemeny2: 'Pannonhalmi apátság megalapítása', 
-        evszam2: '1001' 
+        uralkodo_nev: 'I. István',
+        esemeny1: 'Koronázás',
+        evszam1: '1000',
+        esemeny2: 'Pannonhalmi apátság megalapítása',
+        evszam2: '1001'
     },
-    { 
-        uralkodo_nev: 'IV. Béla',   
-        esemeny1: 'Tatárjárás', 
-        evszam1: '1241-1242' 
+    {
+        uralkodo_nev: 'IV. Béla',
+        esemeny1: 'Tatárjárás',
+        evszam1: '1241-1242'
     },
-    { 
-        uralkodo_nev: 'Mátyás király', 
-        esemeny1: 'Bécs elfoglalása', 
-        evszam1: '1485', 
-        esemeny2: 'Kenyérmezei csata', 
-        evszam2: '1479' },
-    { 
-        uralkodo_nev: 'II. Rákóczi Ferenc', 
-        esemeny1: 'A szabadságharc kezdete', 
-        evszam1: '1703', 
-        esemeny2: 'A szabadságharc vége', 
-        evszam2: '1711' 
+    {
+        uralkodo_nev: 'Mátyás király',
+        esemeny1: 'Bécs elfoglalása',
+        evszam1: '1485',
+        esemeny2: 'Kenyérmezei csata',
+        evszam2: '1479'
+    },
+    {
+        uralkodo_nev: 'II. Rákóczi Ferenc',
+        esemeny1: 'A szabadságharc kezdete',
+        evszam1: '1703',
+        esemeny2: 'A szabadságharc vége',
+        evszam2: '1711'
     }
 ];
 
@@ -60,8 +61,8 @@ const tablebody = document.createElement('tbody')
 table.appendChild(tablebody)
 
 
-const form =document.getElementById('form')
-form.addEventListener('submit', function(e) {
+const form = document.getElementById('form')
+form.addEventListener('submit', function (e) {
     e.preventDefault();
 
 
@@ -75,10 +76,10 @@ form.addEventListener('submit', function(e) {
     const esemeny1value = esemeny1.value
     const evszam1value = evszam1.value
     const esemeny2value = esemeny2.value
-    const evszam2value =evszam2.value
+    const evszam2value = evszam2.value
 
     //plusz sor létrehozása
-    if (uralkodo_nevvalue && esemeny1value && evszam1value){
+    if (uralkodo_nevvalue && esemeny1value && evszam1value) {
         //első esemény
         const tr1 = document.createElement('tr');
         tablebody.appendChild(tr1);
@@ -104,45 +105,43 @@ form.addEventListener('submit', function(e) {
         tr1.appendChild(evszam2Cell);
 
         //3. Adj hozzá validációt a kötelező elemekhez (név, esemény1, évszám1)! Ha valamelyik mező nincs kitöltve, akkor ne fűzzük hozzá a táblázathoz.
-        if (uralkodo_nevvalue && esemeny1value && evszam1value) {
-            if (uralkodo_nevvalue && esemeny1value && evszam1value) {
-                const tr = document.createElement('tr');
-                tablebody.appendChild(tr);
-        
-                const uralkodoCell = document.createElement('td');
-                uralkodoCell.innerHTML = uralkodo_nevvalue;
-                tr.appendChild(uralkodoCell);
-        
-                const esemeny1Cell = document.createElement('td');
-                esemeny1Cell.innerHTML = esemeny1value;
-                tr.appendChild(esemeny1Cell);
-        
-                const evszam1Cell = document.createElement('td');
-                evszam1Cell.innerHTML = evszam1value;
-                tr.appendChild(evszam1Cell);
-        
-                const esemeny2Cell = document.createElement('td');
-                esemeny2Cell.innerHTML = esemeny2value || '';
-                tr.appendChild(esemeny2Cell);
-        
-                const evszam2Cell = document.createElement('td');
-                evszam2Cell.innerHTML = evszam2value || '';
-                tr.appendChild(evszam2Cell);
-            } else {
-                alert("Töltse ki a kötelező mezőket: uralkodo_nev, esemeny1, és evszam1");
-            }
-        }
-    }
-
+        if (uralkodo_nev && esemeny1 && evszam1) {
+            const tr = document.createElement('tr');
+            tablebody.appendChild(tr);
     
-
-    const ujtortenelem = 
-    {
-        uralkodo_nev: uralkodo_nevvalue,
-        esemeny1: esemeny1value,
-        evszam1: evszam1value,
-        esemeny2: esemeny2value,
-        evszam2: evszam2value,
+            const uralkodoCell = document.createElement('td');
+            uralkodoCell.innerHTML = uralkodo_nev;
+            tr.appendChild(uralkodoCell);
+    
+            const esemeny1Cell = document.createElement('td');
+            esemeny1Cell.innerHTML = esemeny1;
+            tr.appendChild(esemeny1Cell);
+    
+            const evszam1Cell = document.createElement('td');
+            evszam1Cell.innerHTML = evszam1;
+            tr.appendChild(evszam1Cell);
+    
+            const esemeny2Cell = document.createElement('td');
+            esemeny2Cell.innerHTML = esemeny2;
+            tr.appendChild(esemeny2Cell);
+    
+            const evszam2Cell = document.createElement('td');
+            evszam2Cell.innerHTML = evszam2;
+            tr.appendChild(evszam2Cell);
+    
+            const ujtortenelem = 
+            { 
+                uralkodo_nev, 
+                esemeny1, 
+                evszam1, 
+                esemeny2, 
+                evszam2 
+            };
+            
+            data.push(ujtortenelem);
+        } else {
+            alert("Töltse ki a kötelező mezőket: uralkodo_nev, esemeny1, és evszam1");
+        }
     }    
 })
 
@@ -150,18 +149,18 @@ form.addEventListener('submit', function(e) {
 
 GenerateTable()
 
-function GenerateTable(){
+function GenerateTable() {
     for (const tortenelem of data) {
         const tr = document.createElement('tr')
         tablebody.appendChild(tr)
-       
+
         const uralkodo_nev = document.createElement('td')
         uralkodo_nev.innerHTML = tortenelem.uralkodo_nev
         tr.appendChild(uralkodo_nev)
 
         const esemeny1 = document.createElement('td')
         esemeny1.innerHTML = tortenelem.esemeny1 || ''
-        tr.appendChild(esemeny1) 
+        tr.appendChild(esemeny1)
 
         const evszam1 = document.createElement('td')
         evszam1.innerHTML = tortenelem.evszam1 || ''
@@ -175,6 +174,6 @@ function GenerateTable(){
         evszam2.innerHTML = tortenelem.evszam2 || ''
         tr.appendChild(evszam2)
 
-        
+
     }
 }   
