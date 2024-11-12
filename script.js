@@ -103,16 +103,38 @@ form.addEventListener('submit', function(e) {
         evszam2Cell.innerHTML = evszam2value || '';
         tr1.appendChild(evszam2Cell);
 
-        tr1.classList.add('selected')
+        //3. Adj hozzá validációt a kötelező elemekhez (név, esemény1, évszám1)! Ha valamelyik mező nincs kitöltve, akkor ne fűzzük hozzá a táblázathoz.
+        if (uralkodo_nevvalue && esemeny1value && evszam1value) {
+            if (uralkodo_nevvalue && esemeny1value && evszam1value) {
+                const tr = document.createElement('tr');
+                tablebody.appendChild(tr);
+        
+                const uralkodoCell = document.createElement('td');
+                uralkodoCell.innerHTML = uralkodo_nevvalue;
+                tr.appendChild(uralkodoCell);
+        
+                const esemeny1Cell = document.createElement('td');
+                esemeny1Cell.innerHTML = esemeny1value;
+                tr.appendChild(esemeny1Cell);
+        
+                const evszam1Cell = document.createElement('td');
+                evszam1Cell.innerHTML = evszam1value;
+                tr.appendChild(evszam1Cell);
+        
+                const esemeny2Cell = document.createElement('td');
+                esemeny2Cell.innerHTML = esemeny2value || '';
+                tr.appendChild(esemeny2Cell);
+        
+                const evszam2Cell = document.createElement('td');
+                evszam2Cell.innerHTML = evszam2value || '';
+                tr.appendChild(evszam2Cell);
+            } else {
+                alert("Töltse ki a kötelező mezőket: uralkodo_nev, esemeny1, és evszam1");
+            }
+        }
     }
 
-    if (esemeny2value === ""){
-        esemeny2value = undefined
-    }
     
-    if (evszam2value === ""){
-        evszam2value = undefined
-    }
 
     const ujtortenelem = 
     {
@@ -121,11 +143,7 @@ form.addEventListener('submit', function(e) {
         evszam1: evszam1value,
         esemeny2: esemeny2value,
         evszam2: evszam2value,
-    }
-    
-
-
-
+    }    
 })
 
 
@@ -157,14 +175,6 @@ function GenerateTable(){
         evszam2.innerHTML = tortenelem.evszam2 || ''
         tr.appendChild(evszam2)
 
-        tr.addEventListener('click', function (e) {
-            console.log('click')
-
-            const ez = tablebody.querySelector('.selected')
-            if(ez != undefined){
-                ez.classList.remove('selected')
-            }
-            e.currentTarget.classList.add('selected')
-        })
+        
     }
 }   
