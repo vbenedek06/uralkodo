@@ -1,3 +1,4 @@
+// Adatok tömb, amely tartalmazza a történelmi események adatait
 const data = [
     {
         uralkodo_nev: 'I. István',
@@ -27,16 +28,17 @@ const data = [
     }
 ];
 
+// Táblázat létrehozása a DOM-ban
 const table = document.createElement('table')
-document.body.appendChild(table)
+document.body.appendChild(table)  // A táblázat hozzáadása a weboldalhoz
 
 const tablehead = document.createElement('thead')
-table.appendChild(tablehead)
+table.appendChild(tablehead)  // Fejléc hozzáadása a táblázathoz
 
 const tableheadrow = document.createElement('tr')
-tablehead.appendChild(tableheadrow)
+tablehead.appendChild(tableheadrow)  // Fejléc sor hozzáadása a fejléchez
 
-//fejlécek
+// Fejléc cellák létrehozása és hozzáadása
 const th1 = document.createElement('th')
 th1.innerHTML = "uralkodo_nev"
 tableheadrow.appendChild(th1)
@@ -58,14 +60,32 @@ th5.innerHTML = "evszam2"
 tableheadrow.appendChild(th5)
 
 const tablebody = document.createElement('tbody')
-table.appendChild(tablebody)
+table.appendChild(tablebody)  // Táblázat törzsének hozzáadása
 
+// Validációs függvény a formon való adatbevitelnél
+function validateFields(esemeny2, evszam2) {
+    // Korábbi hibaüzenetek törlése
+    let errors = document.querySelectorAll('.error');
+    for (const error of errors) {
+        error.innerHTML = '';  // A hibaüzenet törlése
+    }
 
+    innerHTML = ""
+    let result = true 
+    if (uralkodo_nev.value === "") {
+        const par = uralkodo.parentElement
+        const error = par.querySelector(".error")
+        error.innerHTML = "kötelező név"  // Ha nincs kitöltve a név, hibaüzenet
+        result = false
+    }
+}
+
+// Form submit eseménykezelője
 const form = document.getElementById('form')
 form.addEventListener('submit', function (e) {
-    e.preventDefault();
+    e.preventDefault();  // Megakadályozza, hogy az oldal újratöltődjön
 
-
+    // Form elemek értékeinek lekérése
     const uralkodo_nev = document.getElementById('uralkodo_nev')
     const esemeny1 = document.getElementById('esemeny1')
     const evszam1 = document.getElementById('evszam1')
@@ -78,12 +98,12 @@ form.addEventListener('submit', function (e) {
     const esemeny2value = esemeny2.value
     const evszam2value = evszam2.value
 
-    //plusz sor létrehozása
+    // Ha minden kötelező mező kitöltve van, új sor kerül a táblázatba
     if (uralkodo_nevvalue && esemeny1value && evszam1value) {
-        //első esemény
-        const tr1 = document.createElement('tr');
+        const tr1 = document.createElement('tr');  // Új sor létrehozása
         tablebody.appendChild(tr1);
 
+        // Egyes cellák létrehozása és feltöltése
         const uralkodoCell = document.createElement('td');
         uralkodoCell.innerHTML = uralkodo_nevvalue;
         tr1.appendChild(uralkodoCell);
@@ -97,69 +117,43 @@ form.addEventListener('submit', function (e) {
         tr1.appendChild(evszam1Cell);
 
         const esemeny2Cell = document.createElement('td');
-        esemeny2Cell.innerHTML = esemeny2value || '';
+        esemeny2Cell.innerHTML = esemeny2value || '';  // Ha nincs második esemény, üres cellát adunk hozzá
         tr1.appendChild(esemeny2Cell);
 
         const evszam2Cell = document.createElement('td');
-        evszam2Cell.innerHTML = evszam2value || '';
+        evszam2Cell.innerHTML = evszam2value || '';  // Ha nincs második évszám, üres cellát adunk hozzá
         tr1.appendChild(evszam2Cell);
 
-        //3. Adj hozzá validációt a kötelező elemekhez (név, esemény1, évszám1)! Ha valamelyik mező nincs kitöltve, akkor ne fűzzük hozzá a táblázathoz.
-        if (uralkodo_nev && esemeny1 && evszam1) {
-            const tr = document.createElement('tr');
-            tablebody.appendChild(tr);
-    
-            const uralkodoCell = document.createElement('td');
-            uralkodoCell.innerHTML = uralkodo_nev;
-            tr.appendChild(uralkodoCell);
-    
-            const esemeny1Cell = document.createElement('td');
-            esemeny1Cell.innerHTML = esemeny1;
-            tr.appendChild(esemeny1Cell);
-    
-            const evszam1Cell = document.createElement('td');
-            evszam1Cell.innerHTML = evszam1;
-            tr.appendChild(evszam1Cell);
-    
-            const esemeny2Cell = document.createElement('td');
-            esemeny2Cell.innerHTML = esemeny2;
-            tr.appendChild(esemeny2Cell);
-    
-            const evszam2Cell = document.createElement('td');
-            evszam2Cell.innerHTML = evszam2;
-            tr.appendChild(evszam2Cell);
-    
-            const ujtortenelem = 
-            { 
-                uralkodo_nev, 
-                esemeny1, 
-                evszam1, 
-                esemeny2, 
-                evszam2 
-            };
-            
-            data.push(ujtortenelem);
-        } else {
-            alert("Töltse ki a kötelező mezőket: uralkodo_nev, esemeny1, és evszam1");
-        }
-    }    
+        // Adatok hozzáadása a `data` tömbhöz, ha minden kötelező mező ki van töltve
+        const ujtortenelem = { 
+            uralkodo_nev: uralkodo_nevvalue, 
+            esemeny1: esemeny1value, 
+            evszam1: evszam1value, 
+            esemeny2: esemeny2value, 
+            evszam2: evszam2value 
+        };
+        data.push(ujtortenelem);
+    } else {
+        alert("Töltse ki a kötelező mezőket: uralkodo_nev, esemeny1, és evszam1");
+    }
 })
 
-
-
+// A táblázat megjelenítése a `data` tömb adatai alapján
 GenerateTable()
 
+// Funkció, amely létrehozza és feltölti a táblázatot a `data` tömb adatai alapján
 function GenerateTable() {
-    for (const tortenelem of data) {
-        const tr = document.createElement('tr')
+    for (const tortenelem of data) {  // Minden egyes történelem adatot végigmegy
+        const tr = document.createElement('tr')  // Új sor létrehozása
         tablebody.appendChild(tr)
 
+        // A cellák létrehozása és feltöltése
         const uralkodo_nev = document.createElement('td')
         uralkodo_nev.innerHTML = tortenelem.uralkodo_nev
         tr.appendChild(uralkodo_nev)
 
         const esemeny1 = document.createElement('td')
-        esemeny1.innerHTML = tortenelem.esemeny1 || ''
+        esemeny1.innerHTML = tortenelem.esemeny1 || ''  // Ha nincs esemény, üres cellát adunk hozzá
         tr.appendChild(esemeny1)
 
         const evszam1 = document.createElement('td')
@@ -173,7 +167,5 @@ function GenerateTable() {
         const evszam2 = document.createElement('td')
         evszam2.innerHTML = tortenelem.evszam2 || ''
         tr.appendChild(evszam2)
-
-
     }
-}   
+}
